@@ -17,11 +17,16 @@
             
             <script type="text/javascript">
                 var disqus_developer = 0;
-                var disqus_url = {{ request.build_absolute_uri }}
+                var disqus_url = {{ request.build_absolute_uri }};
             </script>
             
             <style>
                 body {padding-top: 50px;}
+                img {
+                    display: inline-block;
+                    height: auto;
+                    max-width: 100%;
+                    }
             </style>
             
             <title>{% block title %}{% endblock %}</title>
@@ -77,8 +82,22 @@
                 </div>
             </div>
             
-            <footer class="container-fluid text-center">
-                <p>This microblog is created by Ravhi Rizaldi - Powered with Django and Python</p>
-            </footer>
+		<!-- Some social button for contact will do -->
+		<a name="contact"></a>
+		<div class="container">
+			<div class="footer">
+				<div class="row">
+					<hr />
+					<div class="col-lg-6">
+						<p>&copy; Created by Ravhi Rizaldi - Powered by Django and Python</p>
+					</div>
+					<div class="col-lg-6 text-right">
+						Connect with us on
+						<a href="http://www.facebook.com/ravhirizaldi"><i class="fa fa-facebook"></i> Facebook</a> or
+						<a href="#"><i class="fa fa-twitter"></i> Twitter</a>
+					</div>
+				</div>
+            </div>
+      </div>
         </body>
     </html>

@@ -29,10 +29,24 @@
                     }
             </style>
             
+            <meta property="og:url"           content={{ request.build_absolute_uri }} />
+            <meta property="og:type"          content="website" />
+            <meta property="og:title"         content="Navhi Microblog" />
+            <meta property="og:description"   content="Just a simple blog build by Django and Python" />
+            
             <title>{% block title %}{% endblock %}</title>
         </head>
         
         <body>
+            <div id="fb-root"></div>
+            <script>(function(d, s, id) {
+              var js, fjs = d.getElementsByTagName(s)[0];
+              if (d.getElementById(id)) return;
+              js = d.createElement(s); js.id = id;
+              js.src = 'https://connect.facebook.net/id_ID/sdk.js#xfbml=1&version=v2.10';
+              fjs.parentNode.insertBefore(js, fjs);
+            }(document, 'script', 'facebook-jssdk'));</script>
+            
             <header class="navbar navbar-inverse navbar-fixed-top bs-docs-nav" role="banner">
                 <div class="container">
                     <div class="navbar-header">

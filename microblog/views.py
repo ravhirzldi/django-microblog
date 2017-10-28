@@ -28,4 +28,6 @@ def post_detail(request, year, month, day, post):
                              publish__day=day)  
     posts = Post.published.all()
     return render(request, 'microblog/post_detail.html', {'post': post})
+
+
     

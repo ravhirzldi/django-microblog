@@ -1,0 +1,84 @@
+<!doctype html>
+    <html lang="en">
+        {% load costume_tags %}
+        <head>
+            <meta charset="utf-8">
+            <meta http-equiv="X-UA-Compatible" content="IE=edge">
+            <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+            
+            <!-- Latest compiled and minified CSS -->
+            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+            
+            <!-- Optional theme -->
+            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+            
+            <!-- Latest compiled and minified JavaScript -->
+            <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+            
+            <script type="text/javascript">
+                var disqus_developer = 1;
+                var disqus_url = 'http://example.com'
+            </script>
+            
+            <style>
+                body {padding-top: 50px;}
+            </style>
+            
+            <title>{% block title %}{% endblock %}</title>
+        </head>
+        
+        <body>
+            <header class="navbar navbar-inverse navbar-fixed-top bs-docs-nav" role="banner">
+                <div class="container">
+                    <div class="navbar-header">
+                        <button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".bs-navbar-collapse">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <a href="/" class="navbar-brand">My First Microblog</a>
+                    </div>
+                    <nav class="collapse navbar-collapse bs-navbar-collapse" role="navigation">
+                        <form class="navbar-form navbar-right" role="search">
+                            <div class="form-group">
+                                <input type="text" class="form-control" placeholder="search">
+                            </div>
+                            <button type="submit" class="btn btn-default">Submit</button>
+                        </form>
+                        <ul class="nav navbar-nav">
+                            <li class="active"><a href="/">Home</a></li>
+                            <li><a href="#">About</a></li>
+                        </ul>
+                    </nav>
+                </div>
+            </header>
+                
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-8 text-justify">
+                        {% block content %}
+                        {% endblock %}
+                    </div>
+                    <div class="col-md-4">
+                        </p>
+                        <div class="well text-center">
+                            <p class="lead">
+							This is my first Microblog on Internet and now have <b>{% total_post %}</b> articles.
+						</p>
+                        </div>
+                        <div class="well text-center">
+                            <p class="lead">Hello There</p>
+                        </div>
+                        <div class="well text-center">
+                            <p class="lead">Hello There</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <footer class="container-fluid text-center">
+                <p>This microblog is created by Ravhi Rizaldi - Powered with Django and Python</p>
+            </footer>
+        </body>
+    </html>

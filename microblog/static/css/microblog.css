@@ -76,3 +76,8 @@ img {
 .social-class li{margin-bottom:4px}.social-class li:hover .social-hex{opacity:1}
 .social-class li:hover code{background-color:#e8e8ee}
 .social-class code{cursor:default}
+
+h1 a {
+    color: #FCA205;
+    font-family: 'Lobster';
+}

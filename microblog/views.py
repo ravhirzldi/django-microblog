@@ -9,7 +9,7 @@ class PostListView(ListView):
     # This will only showing published Post.
     queryset = Post.published.all()
     context_object_name = 'posts'
-    paginate_by = 5
+    paginate_by = 4
     template_name = 'microblog/post_list.html'
 
 # This function is deprecated because we have another class with pagination function

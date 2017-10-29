@@ -1,11 +1,25 @@
 @import url(//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css);
 
-body {padding-top: 50px;}
+/*body {padding-top: 50px;}*/
+body {
+  padding-top: 54px;
+}
+
+@media (min-width: 992px) {
+  body {
+    padding-top: 56px;
+  }
+}
 
 img {
      display: inline-block;
      height: auto;
      max-width: 100%;
+}
+
+h1 a {
+    color: #FCA205;
+    font-family: 'Lobster';
 }
 
 @import url(//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css);
@@ -76,8 +90,3 @@ img {
 .social-class li{margin-bottom:4px}.social-class li:hover .social-hex{opacity:1}
 .social-class li:hover code{background-color:#e8e8ee}
 .social-class code{cursor:default}
-
-h1 a {
-    color: #FCA205;
-    font-family: 'Lobster';
-}

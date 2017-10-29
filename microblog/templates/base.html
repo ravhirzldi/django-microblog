@@ -5,151 +5,110 @@
         <head>
             <meta charset="utf-8">
             <meta http-equiv="X-UA-Compatible" content="IE=edge">
-            <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+            <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
             
             <!-- Latest compiled and minified CSS -->
-            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-            
-            <!-- Optional theme -->
-            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
-            
-            <!-- Latest compiled and minified JavaScript -->
-            <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-			
+            <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">-->
+			<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css">
 			<link rel="stylesheet" type="text/css" href="{% static 'css/microblog.css' %}" />
-			
 			<link href="http://fonts.googleapis.com/css?family=Lobster&subset=latin,latin-ext" rel="stylesheet" type="text/css">
             
             <!--Disqus Meta Tag configuration-->
             <script type="text/javascript">
-                var disqus_developer = 0;
-                var disqus_url = {{ request.build_absolute_uri }};
+            var disqus_developer = 0;
+            var disqus_url = {{ request.build_absolute_uri }};
             </script>
             
             <!--Facebook meta tag for sharing button configuration-->
             <meta property="og:url"           content="{{ request.build_absolute_uri }}" />
             <meta property="og:type"          content="website" />
-            <meta property="og:title"         content="Navhi Microblog" />
-            <meta property="og:description"   content="Just a simple blog build by Django and Python" />
+            <meta property="og:title"         content={{ post.title }} />
+            <meta property="og:description"   content={{ post.body|truncatewords:5|striptags }} />
             
             <title>{% block title %}{% endblock %}</title>
         </head>
         
-        <body>
-            <!--Facebook javascript for sharing button-->
-            <div id="fb-root"></div>
-            <script>(function(d, s, id) {
-              var js, fjs = d.getElementsByTagName(s)[0];
-              if (d.getElementById(id)) return;
-              js = d.createElement(s); js.id = id;
-              js.src = 'https://connect.facebook.net/id_ID/sdk.js#xfbml=1&version=v2.10';
-              fjs.parentNode.insertBefore(js, fjs);
-            }(document, 'script', 'facebook-jssdk'));</script>
-			
-			<script>window.twttr = (function(d, s, id) {
-			var js, fjs = d.getElementsByTagName(s)[0],
-			  t = window.twttr || {};
-			if (d.getElementById(id)) return t;
-			js = d.createElement(s);
-			js.id = id;
-			js.src = "https://platform.twitter.com/widgets.js";
-			fjs.parentNode.insertBefore(js, fjs);
-		  
-			t._e = [];
-			t.ready = function(f) {
-			  t._e.push(f);
-			};
-		  
-			return t;
-		  }(document, "script", "twitter-wjs"));</script>
-			
-			<script>
-				$(function () {
-				var all_classes = "";
-				var timer = undefined;
-				$.each($('li', '.social-class'), function (index, element) {
-				  all_classes += " btn-" + $(element).data("code");
-				});
-				$('li', '.social-class').mouseenter(function () {
-				  var icon_name = $(this).data("code");
-				  if ($(this).data("icon")) {
-					icon_name = $(this).data("icon");
-				  }
-				  var icon = "<i class='fa fa-" + icon_name + "'></i>";
-				  $('.btn-social', '.social-sizes').html(icon + "Sign in with " + $(this).data("name"));
-				  $('.btn-social-icon', '.social-sizes').html(icon);
-				  $('.btn', '.social-sizes').removeClass(all_classes);
-				  $('.btn', '.social-sizes').addClass("btn-" + $(this).data('code'));
-				});
-				$($('li', '.social-class')[Math.floor($('li', '.social-class').length * Math.random())]).mouseenter();
-			  });
-			</script>
-            
-            <header class="navbar navbar-inverse navbar-fixed-top bs-docs-nav" role="banner">
-                <div class="container">
-                    <div class="navbar-header">
-                        <button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".bs-navbar-collapse">
-                            <span class="sr-only">Toggle navigation</span>
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                        </button>
-                        <a href="/" class="navbar-brand">My First Microblog</a>
-                    </div>
-                    <nav class="collapse navbar-collapse bs-navbar-collapse" role="navigation">
-                        <form class="navbar-form navbar-right" role="search">
-                            <div class="form-group">
-                                <input type="text" class="form-control" placeholder="search">
-                            </div>
-                            <button type="submit" class="btn btn-default">Submit</button>
-                        </form>
-                        <ul class="nav navbar-nav">
-                            <li class="active"><a href="/">Home</a></li>
-                            <li><a href="#about">About</a></li>
-                        </ul>
-                    </nav>
-                </div>
-            </header>
+        <body>  
+			<!-- Navigation -->
+			<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+			  <div class="container">
+				<a class="navbar-brand" href="/">Navhi Microblog</a>
+				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+				  <span class="navbar-toggler-icon"></span>
+				</button>
+				<div class="collapse navbar-collapse" id="navbarResponsive">
+				  <ul class="navbar-nav ml-auto">
+					<li class="nav-item active">
+					  <a class="nav-link" href="/">Home
+						<span class="sr-only">(current)</span>
+					  </a>
+					</li>
+					<li class="nav-item">
+					  <a class="nav-link" href="#about">About</a>
+					</li>
+				  </ul>
+				</div>
+			  </div>
+			</nav>
                 
             <div class="container">
                 <div class="row">
-                    <div class="col-md-8 text-justify">
-                        {% block content %}
-                        {% endblock %}
-                    </div>
-                    <div class="col-md-4">
-                        </p>
-                        <div class="well text-center">
-                            <p class="lead">
+					
+					<!--Page content fot each page-->
+					{% block content %}
+                    {% endblock %}
+					<!--End Page Content-->
+					
+					<!--Search widget-->
+					<div class="col-md-4">
+						<!-- Search Widget -->
+						<div class="card my-4">
+						  <h5 class="card-header">Search</h5>
+						  <div class="card-body">
+							<div class="input-group">
+							  <input type="text" class="form-control" placeholder="Search for...">
+							  <span class="input-group-btn">
+								<button class="btn btn-secondary" type="button">Go!</button>
+							  </span>
+							</div>
+						  </div>
+						</div>
+						
+						<!-- Side Widget -->
+						<div class="card my-4">
+						  <h5 class="card-header">Side Widget</h5>
+						  <div class="card-body">
+							You can put anything you want inside of these side widgets. They are easy to use, and feature the new Bootstrap 4 card containers!
+						  </div>
+						</div>
+						
+						<div class="card my-4">
+						  <div class="card-body">
 							This is my first Microblog on Internet and now have <b>{% total_post %}</b> articles.
-						</p>
-                        </div>
-                        <div class="well text-center">
-                            <p class="lead">Hello There</p>
-                        </div>
-                        <div class="well text-center">
-                            <p class="lead">Hello There</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-		<!-- Some social button for contact will do -->
-		<a name="contact"></a>
-		<div class="container">
-			<div class="footer">
-				<div class="row">
-					<hr />
-					<div class="col-lg-6">
-						<p>&copy; Created by Ravhi Rizaldi - Powered by Django and Python</p>
-					</div>
-					<div class="col-lg-6 text-right">
-						Connect with us on
-						<a href="http://www.facebook.com/ravhirizaldi"><i class="fa fa-facebook"></i> Facebook</a> or
-						<a href="#"><i class="fa fa-twitter"></i> Twitter</a>
+						  </div>
+						</div>
+						
+						<div class="card" style="width: 22rem;">
+							<img class="card-img-top" src="http://via.placeholder.com/450x350" alt="Card image cap">
+							<div class="card-body">
+								<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+							</div>
+						</div>
+						
 					</div>
 				</div>
             </div>
-      </div>
+            
+		<!-- Footer -->
+		<footer class="py-5 bg-dark">
+			<div class="container">
+				<p class="m-0 text-center text-white">Copyright &copy; Navhi Microblog 2017 - Powered by Django and Python</p>
+			</div>
+		</footer>
+		
+		<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
         </body>
     </html>

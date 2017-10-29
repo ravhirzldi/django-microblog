@@ -1,6 +1,7 @@
 <!doctype html>
     <html lang="en">
         {% load costume_tags %}
+		{% load static %}
         <head>
             <meta charset="utf-8">
             <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -14,21 +15,14 @@
             
             <!-- Latest compiled and minified JavaScript -->
             <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+			
+			<link rel="stylesheet" type="text/css" href="{% static 'css/microblog.css' %}" />
             
             <!--Disqus Meta Tag configuration-->
             <script type="text/javascript">
                 var disqus_developer = 0;
                 var disqus_url = {{ request.build_absolute_uri }};
             </script>
-            
-            <style>
-                body {padding-top: 50px;}
-                img {
-                    display: inline-block;
-                    height: auto;
-                    max-width: 100%;
-                    }
-            </style>
             
             <!--Facebook meta tag for sharing button configuration-->
             <meta property="og:url"           content="{{ request.build_absolute_uri }}" />
@@ -49,6 +43,45 @@
               js.src = 'https://connect.facebook.net/id_ID/sdk.js#xfbml=1&version=v2.10';
               fjs.parentNode.insertBefore(js, fjs);
             }(document, 'script', 'facebook-jssdk'));</script>
+			
+			<script>window.twttr = (function(d, s, id) {
+			var js, fjs = d.getElementsByTagName(s)[0],
+			  t = window.twttr || {};
+			if (d.getElementById(id)) return t;
+			js = d.createElement(s);
+			js.id = id;
+			js.src = "https://platform.twitter.com/widgets.js";
+			fjs.parentNode.insertBefore(js, fjs);
+		  
+			t._e = [];
+			t.ready = function(f) {
+			  t._e.push(f);
+			};
+		  
+			return t;
+		  }(document, "script", "twitter-wjs"));</script>
+			
+			<script>
+				$(function () {
+				var all_classes = "";
+				var timer = undefined;
+				$.each($('li', '.social-class'), function (index, element) {
+				  all_classes += " btn-" + $(element).data("code");
+				});
+				$('li', '.social-class').mouseenter(function () {
+				  var icon_name = $(this).data("code");
+				  if ($(this).data("icon")) {
+					icon_name = $(this).data("icon");
+				  }
+				  var icon = "<i class='fa fa-" + icon_name + "'></i>";
+				  $('.btn-social', '.social-sizes').html(icon + "Sign in with " + $(this).data("name"));
+				  $('.btn-social-icon', '.social-sizes').html(icon);
+				  $('.btn', '.social-sizes').removeClass(all_classes);
+				  $('.btn', '.social-sizes').addClass("btn-" + $(this).data('code'));
+				});
+				$($('li', '.social-class')[Math.floor($('li', '.social-class').length * Math.random())]).mouseenter();
+			  });
+			</script>
             
             <header class="navbar navbar-inverse navbar-fixed-top bs-docs-nav" role="banner">
                 <div class="container">

@@ -19,6 +19,7 @@ from django.conf.urls.static import static
 from django.conf import settings
 from microblog import views
 
+# URL Pattern is here
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     # include URL pattern from microblog/urls.py

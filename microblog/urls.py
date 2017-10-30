@@ -1,6 +1,6 @@
 # microblog/urls.py
 from django.conf.urls import url, include
-from .views import PostListView, post_detail, CreateNewPost
+from .views import PostListView, post_detail, CreateNewPost, EditPost
 from . import views
 
 urlpatterns = [
@@ -16,4 +16,8 @@ urlpatterns = [
         name='post_detail'),
     # Create new post
     url(r'^post/new/$', views.CreateNewPost.as_view(), name='post_new'),
+    # Delete Post
+    url(r'^post/delete/(?P<pk>\d+)$', views.DeletePost.as_view(), name='post_delete'),
+    # Edit Post
+    url(r'^post/edit/(?P<pk>\d+)$', views.EditPost.as_view(), name='post_edit'),
 ]

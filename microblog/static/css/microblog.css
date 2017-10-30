@@ -1,6 +1,5 @@
 @import url(//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css);
 
-/*body {padding-top: 50px;}*/
 body {
   padding-top: 54px;
 }
@@ -22,7 +21,22 @@ h1 a {
     font-family: 'Lobster';
 }
 
-@import url(//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css);
+/*Fixed footer and set it to sticky*/
+html {
+  position: relative;
+  min-height: 100%;
+}
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  
+  /* additional style for effect only */
+  text-align: center;
+  background-color: #333;
+  color: #fff;
+}
+
 /*
  * Social Buttons for Bootstrap
  *

@@ -1,6 +1,6 @@
 from django.shortcuts import render, get_object_or_404
 from django.views.generic import ListView
-from django.views.generic.edit import CreateView, DeleteView
+from django.views.generic.edit import CreateView, DeleteView, UpdateView
 from django.urls import reverse_lazy
 from django.contrib.auth.decorators import login_required
 from .models import Post
@@ -41,4 +41,10 @@ class CreateNewPost(CreateView):
     
 class DeletePost(DeleteView):
     model = Post
-    success_url = reverse_lazy('PostListView')
+    success_url = reverse_lazy('post_list')
+    
+class EditPost(UpdateView):
+    model = Post
+    success_url = reverse_lazy('post_list')
+    template_name = 'microblog/post_new.html'
+    fields = 'title', 'author', 'body', 'status'

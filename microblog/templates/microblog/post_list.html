@@ -5,14 +5,11 @@
 	<h4><small>RECENT POSTS</small></h4>
 	<hr>
 	{% for post in posts %}
-		<h2>{{ post.title }}</h2>
+		<h1><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></h1>
 		<h4><small><span class="glyphicon glyphicon-time"></span> {{ post.created }}</small></h4>
+		{% autoescape off %}
 		<p class="text-justify">{{ post.body|truncatewords:80|striptags|linebreaks }}</p>
-		<p class="text-right">
-			<a href="{{ post.get_absolute_url }}" class="text-right">
-			continue reading...
-			</a>
-		</p>
+		{% endautoescape %}
 		<hr>
 	{% endfor %}
 	

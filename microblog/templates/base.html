@@ -18,6 +18,21 @@
             var disqus_developer = 0;
             var disqus_url = {{ request.build_absolute_uri }};
             </script>
+			
+			<!--Footer responsive resize-->
+			<script>
+			function setfooter(){
+			var ht = document.getElementById("footer").scrollHeight;
+			document.body.style.marginBottom = ht + "px";
+			}
+			
+			window.addEventListener('resize', function(){
+					setfooter();
+				}, true);
+			window.addEventListener('load', function(){
+				setfooter();
+			}, true);
+			</script>
             
             <!--Facebook meta tag for sharing button configuration-->
             <meta property="og:url"           content="{{ request.build_absolute_uri }}" />
@@ -106,7 +121,7 @@
             </div>
             
 		<!-- Footer -->
-		<footer class="py-5 bg-dark">
+		<footer id="footer" class="footer py-5 bg-dark">
 			<div class="container">
 				<p class="m-0 text-center text-white">Copyright &copy; Navhi Microblog 2017 - Powered by Django and Python</p>
 			</div>

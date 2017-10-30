@@ -2,9 +2,9 @@
 {% block title %}{{ post.title }}{% endblock %}
 {% block content %}	
 <div class="col-lg-8">
-	<p><h1 class="mt-4"><span style="color:#e74c3c"><cite>
-		{{ post.title }}
-	</cite></span></h1>
+	<p><h1 class="mt-4"><cite>
+		<a href="{{ post.get_absolute_url }}">{{ post.title }}</a>
+	</cite></h1>
 	<hr />
 	<p class="date">
 		Published on {{ post.publish }} 
@@ -34,6 +34,15 @@
 		
 	</div>
 	<hr />
+	
+	{% if user.is_authenticated %}
+	<div class="card my-4 text-center bg-light text-white">
+		<div class="card-body">
+			<a class="btn btn-danger" href="{% url 'post_delete' post.id %}" role="button">Delete Post</a>
+			<a class="btn btn-info" href="{% url 'post_edit' post.id %}" role="button">Edit Post</a>
+		</div>
+	</div>
+	{% endif %}
 	
 	<!--Disqus comment plugin-->
     <div id="disqus_thread"></div>

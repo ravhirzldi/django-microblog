@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% block title %}Navhi Microblog - Login{% endblock %}
+{% block content %}
+    <div class="col-lg-8">
+        <div class="col align-self-center">
+            <div class="card my-4 text-center bg-light">
+                <h5 class="card-header bg-danger text-white">Post Delete</h5>
+                <div class="card-body">
+                    <form method="post">{% csrf_token %}
+                        <p><b>Are you sure you want to delete "{{ object }}" ?</b></p>
+                        <button class="btn btn-danger btn-block" type="submit">Delete</button>
+                    </form>
+                    <p></p>
+                    <a class="btn btn-info btn-block" href="{{ post.get_absolute_url }}" role="button">Cancel</a>
+                </div>
+                <div class="card-footer text-muted">
+                    This action cannot be undo
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

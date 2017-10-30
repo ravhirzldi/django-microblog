@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.utils import timezone
 from django.core.urlresolvers import reverse
+from django.template.defaultfilters import slugify
 from ckeditor_uploader.fields import RichTextUploadingField
 from taggit.managers import TaggableManager
 
@@ -42,6 +43,13 @@ class Post(models.Model):
         
     def __str__(self):
         return self.title
+    
+    def save(self, *args, **kwargs):
+        # If slug failed to created it will be automatically created after you save
+        if not self.id:
+            self.slug = slugify(self.title)
+        super(Post, self).save(*args, **kwargs)
+        
     
     # Reversing URl to post_detail so get URL like,
     # ../(year)/(month)/(day)/slug

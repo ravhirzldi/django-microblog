@@ -37,7 +37,7 @@ def post_detail(request, year, month, day, post):
 class CreateNewPost(CreateView):
     model = Post
     template_name = 'microblog/post_new.html'
-    fields = '__all__'
+    fields = 'title', 'author', 'body', 'status'
     
 class DeletePost(DeleteView):
     model = Post

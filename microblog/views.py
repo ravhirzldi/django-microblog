@@ -1,10 +1,10 @@
-from django.shortcuts import render, get_object_or_404, render_to_response
+from django.shortcuts import render, get_object_or_404
 from django.views.generic import ListView
-from django.http import *
-from django.template import RequestContext
+from django.views.generic.edit import CreateView, DeleteView
+from django.urls import reverse_lazy
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth import login, logout
 from .models import Post
+# from .forms import NewPostForm
 
 # Create your views here.
 class PostListView(ListView):
@@ -32,3 +32,13 @@ def post_detail(request, year, month, day, post):
                              publish__day=day)  
     posts = Post.published.all()
     return render(request, 'microblog/post_detail.html', {'post': post})
+
+# This class is for creating new post on front-end
+class CreateNewPost(CreateView):
+    model = Post
+    template_name = 'microblog/post_new.html'
+    fields = '__all__'
+    
+class DeletePost(DeleteView):
+    model = Post
+    success_url = reverse_lazy('PostListView')

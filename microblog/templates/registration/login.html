@@ -1,11 +1,12 @@
 {% extends "base.html" %}
+{% load crispy_forms_tags %}
 {% block title %}Navhi Microblog - Login{% endblock %}
 {% block content %}
-    <div class="col-lg-8 text-justify">
+    <div class="col-lg-8">
         <h2>Login</h2>
         <form method="POST">
             {% csrf_token %}
-            {{ form.as_p }}
+            {{ form|crispy }}
             <button class="btn btn-success" type="submit">Login</button>
         </form>
     </div>

@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'ckeditor',
     'ckeditor_uploader',
     'taggit',
+    'crispy_forms',
 ]
 
 MIDDLEWARE = [
@@ -147,9 +148,13 @@ CKEDITOR_CONFIGS = {
             ['Maximize'],
         ],
         'extraPlugins': 'justify,liststyle,indent,image2',
+    'width': "auto",
    },
 }
 
 # Login and logout settings
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
+LOGIN_URL = 'microblog_login'
+
+CRISPY_TEMPLATE_PACK = 'bootstrap4'

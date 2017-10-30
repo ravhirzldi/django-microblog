@@ -21,16 +21,9 @@ from microblog import views
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    # redirect to post_list.html
-    url(r'^$', views.PostListView.as_view(), name='post_list'),
-    # Full Post Detail URL
-    # Get 4 digits of year, 2 digits of month and day in the end is slug
-    # So it will get URL like, ../2017/09/22/this-is-post
-    # It will be SEO Friendly too
-    url(r'^(?P<year>\d{4})/(?P<month>\d{2})/(?P<day>\d{2})/'\
-        r'(?P<post>[-\w]+)/$',
-        views.post_detail,
-        name='post_detail'),
+    # include URL pattern from microblog/urls.py
+    url(r'', include('microblog.urls')),
+    # Login and logout URL
     url(r'^login/', include('django.contrib.auth.urls')),
     url(r'^ckeditor/', include('ckeditor_uploader.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -1,13 +1,13 @@
 {% extends "base.html" %}
 {% block title %}Navhi Microblog - Articles{% endblock %}
 {% block content %}		
-<div class="col-lg-8 text-justify">
+<div class="col-lg-8">
 	<h4><small>RECENT POSTS</small></h4>
 	<hr>
 	{% for post in posts %}
 		<h2>{{ post.title }}</h2>
 		<h4><small><span class="glyphicon glyphicon-time"></span> {{ post.created }}</small></h4>
-		<p>{{ post.body|truncatewords:80|striptags|linebreaks }}</p>
+		<p class="text-justify">{{ post.body|truncatewords:80|striptags|linebreaks }}</p>
 		<p class="text-right">
 			<a href="{{ post.get_absolute_url }}" class="text-right">
 			continue reading...

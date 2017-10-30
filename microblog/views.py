@@ -37,7 +37,7 @@ def post_detail(request, year, month, day, post):
 class CreateNewPost(CreateView):
     model = Post
     template_name = 'microblog/post_new.html'
-    fields = 'title', 'author', 'body', 'status'
+    fields = 'title', 'author', 'body', 'status', 'tags'
     
 class DeletePost(DeleteView):
     model = Post
@@ -47,4 +47,4 @@ class EditPost(UpdateView):
     model = Post
     success_url = reverse_lazy('post_list')
     template_name = 'microblog/post_edit.html'
-    fields = 'title', 'author', 'body', 'status'
+    fields = 'title', 'author', 'body', 'status', 'tags'

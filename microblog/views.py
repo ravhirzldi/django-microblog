@@ -45,6 +45,5 @@ class DeletePost(DeleteView):
     
 class EditPost(UpdateView):
     model = Post
-    success_url = reverse_lazy('post_list')
     template_name = 'microblog/post_edit.html'
     fields = 'title', 'author', 'body', 'status', 'tags'

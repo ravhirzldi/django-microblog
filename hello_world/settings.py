@@ -23,7 +23,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = '#bwfo2j^)bi+thp5k!g#@-tvqsu5xpk-m^wunvfd7p+4a5syos'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['127.0.0.1', 'ravhirizaldi.pythonanywhere.com']
 
@@ -127,7 +127,7 @@ PROJECT_DIR = os.path.dirname(os.path.abspath(__file__))
 STATIC_ROOT = os.path.join(PROJECT_DIR, 'static')
 
 MEDIA_URL = "/media/"
-MEDIA_ROOT = os.path.join(STATIC_ROOT, "media")
+MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 
 CKEDITOR_UPLOAD_SLUGIFY_FILENAME = False
 CKEDITOR_UPLOAD_PATH = "uploads/"

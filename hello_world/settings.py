@@ -149,3 +149,7 @@ CKEDITOR_CONFIGS = {
         'extraPlugins': 'justify,liststyle,indent,image2',
    },
 }
+
+# Login and logout settings
+LOGIN_REDIRECT_URL = '/'
+LOGOUT_REDIRECT_URL = '/'

@@ -31,5 +31,6 @@ urlpatterns = [
         r'(?P<post>[-\w]+)/$',
         views.post_detail,
         name='post_detail'),
+    url(r'^login/', include('django.contrib.auth.urls')),
     url(r'^ckeditor/', include('ckeditor_uploader.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

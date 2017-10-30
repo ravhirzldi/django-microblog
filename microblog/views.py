@@ -1,5 +1,9 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, render_to_response
 from django.views.generic import ListView
+from django.http import *
+from django.template import RequestContext
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth import login, logout
 from .models import Post
 
 # Create your views here.
@@ -28,6 +32,3 @@ def post_detail(request, year, month, day, post):
                              publish__day=day)  
     posts = Post.published.all()
     return render(request, 'microblog/post_detail.html', {'post': post})
-
-
-    

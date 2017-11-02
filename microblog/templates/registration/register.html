@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% block title %}Navhi Microblog - Signup{% endblock %}
+{% block content %}
+<div class="col-lg-8 text-justify">
+      <h1>Register Form</h1>
+      <hr/>
+      <form method="post" action=".">{% csrf_token %}
+            <table border="0">
+                  {{ form|crispy }}
+            </table>
+            <p><input type="submit" class="btn btn-success btn-block" value="Register"></p>
+      </form>
+      <p></p><a class="btn btn-info btn-block" href="{% url 'login' %}" role="button">Login</a></p>
+</div>
+{% endblock %}

@@ -17,7 +17,7 @@ from django.conf.urls import url, include
 from django.contrib import admin
 from django.conf.urls.static import static
 from django.conf import settings
-from microblog import views
+from microblog.views import register, register_success
 
 # URL Pattern is here
 urlpatterns = [
@@ -27,4 +27,6 @@ urlpatterns = [
     # Login and logout URL
     url(r'^login/', include('django.contrib.auth.urls')),
     url(r'^ckeditor/', include('ckeditor_uploader.urls')),
+    url(r'^register/$', register),
+    url(r'^register/success/$', register_success),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT) + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

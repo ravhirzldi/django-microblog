@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% block title %}Navhi Microblog - Success{% endblock %}
+{% block content %}
+<div class="col-lg-8 text-justify">
+    <h1>Thank you for registering.</h1>
+    <hr/>
+    <a class="btn btn-success btn-block" href="{% url 'login' %}" role="button">Login</a>
+</div>
+{% endblock %}

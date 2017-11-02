@@ -1,8 +1,13 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, render_to_response
 from django.views.generic import ListView
 from django.views.generic.edit import CreateView, DeleteView, UpdateView
 from django.urls import reverse_lazy
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth import login, authenticate
+from django.contrib.auth.forms import UserCreationForm
+from django.views.decorators.csrf import csrf_protect
+from django.template import RequestContext
+from django.http import HttpResponseRedirect
+from microblog.forms import *
 from .models import Post
 # from .forms import NewPostForm
 
@@ -47,3 +52,24 @@ class EditPost(UpdateView):
     model = Post
     template_name = 'microblog/post_edit.html'
     fields = 'title', 'author', 'body', 'status', 'tags'
+    
+@csrf_protect
+def register(request):
+    if request.method == 'POST':
+        form = RegistrationForm(request.POST)
+        if form.is_valid():
+            user = User.objects.create_user(
+            username=form.cleaned_data['username'],
+            password=form.cleaned_data['password1'],
+            email=form.cleaned_data['email']
+            )
+            return HttpResponseRedirect('/register/success/')
+    else:
+        form = RegistrationForm()
+
+    return render(request, 'registration/register.html', {'form': form})
+
+def register_success(request):
+    return render_to_response(
+    'registration/register_success.html',
+    )

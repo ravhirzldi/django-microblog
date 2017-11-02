@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
     <html lang="en">
         {% load costume_tags %}
 		{% load static %}
@@ -11,6 +11,7 @@
             <!-- Latest compiled and minified Bootstrap 4 Beta 4 -->
 			<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css">
 			<link rel="stylesheet" type="text/css" href="{% static 'css/microblog.css' %}" />
+			<!--Costume font from Google Font API's-->
 			<link href="http://fonts.googleapis.com/css?family=Lobster&subset=latin,latin-ext" rel="stylesheet" type="text/css">
             
             <!--Disqus Meta Tag configuration-->
@@ -37,8 +38,8 @@
             <!--Facebook meta tag for sharing button configuration-->
             <meta property="og:url"           content="{{ request.build_absolute_uri }}" />
             <meta property="og:type"          content="website" />
-            <meta property="og:title"         content={{ post.title }} />
-            <meta property="og:description"   content={{ post.body|truncatewords:5|striptags }} />
+            <meta property="og:title"         content="{{ post.title }}" />
+            <meta property="og:description"   content="{{ post.body|truncatewords:5|striptags }}" />
             
             <title>{% block title %}{% endblock %}</title>
         </head>
@@ -58,6 +59,9 @@
 						<span class="sr-only">(current)</span>
 					  </a>
 					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="#about">About</a>
+					</li>
 					{% if user.is_authenticated %}
 					<li class="nav-item dropdown">
 						<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -70,11 +74,15 @@
 						</div>
 					</li>
 					{% else %}
-					<li class="nav-item">
-						<a class="nav-link" href="{% url 'login' %}">login</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link" href="/register">Register</a>
+					<li class="nav-item dropdown">
+						<a class="nav-link dropdown-toggle" href="#user" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+							User
+						</a>
+						<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+							<a class="dropdown-item" href="{% url 'login' %}">Login</a>
+							<div class="dropdown-divider"></div>
+							<a class="dropdown-item" href="/register">Register</a>
+						</div>
 					</li>
 					{% endif %}
 				  </ul>
@@ -107,15 +115,17 @@
 						
 						<!-- Side Widget -->
 						<div class="card my-4">
-							<h5 class="card-header">Side Widget</h5>
+							<h5 class="card-header bg-success text-white">Side Widget</h5>
 							<div class="card-body">
 								You can put anything you want inside of these side widgets. They are easy to use, and feature the new Bootstrap 4 card containers!
 							</div>
 						</div>
 						
 						<div class="card my-4">
-							<div class="card-body">
-								This is my first Microblog on Internet and now I have <b>{% total_post %}</b> articles.
+							<h5 class="card-header bg-primary text-white">Welcome!</h5>
+							<div class="card-body text-center">
+								This is my first Microblog on Internet and now I have <b>{% total_post %}</b> articles and
+								have <b>{% total_user %}</b> Users registered.
 							</div>
 						</div>
 						
@@ -131,8 +141,8 @@
 		</footer>
 		
 		<!--All Script put in here to make page loading faster-->
-		<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
-		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
+		<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"></script>
         </body>
     </html>

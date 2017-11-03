@@ -20,4 +20,6 @@ urlpatterns = [
     url(r'^post/delete/(?P<pk>\d+)$', views.DeletePost.as_view(), name='post_delete'),
     # Edit Post
     url(r'^post/edit/(?P<pk>\d+)$', views.EditPost.as_view(), name='post_edit'),
+    #About
+    url(r'about/$', views.About, name='about'),
 ]

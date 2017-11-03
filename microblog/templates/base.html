@@ -54,14 +54,25 @@
 				</button>
 				<div class="collapse navbar-collapse" id="navbarResponsive">
 				  <ul class="navbar-nav ml-auto">
+					{% if request.get_full_path == "/about/" %}
+					<li class="nav-item">
+					  <a class="nav-link" href="/">Home
+						<span class="sr-only">(current)</span>
+					  </a>
+					</li>
+					<li class="nav-item active">
+						<a class="nav-link" href="{% url 'about' %}">About</a>
+					</li>
+					{% else %}
 					<li class="nav-item active">
 					  <a class="nav-link" href="/">Home
 						<span class="sr-only">(current)</span>
 					  </a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" href="#about">About</a>
+						<a class="nav-link" href="{% url 'about' %}">About</a>
 					</li>
+					{% endif %}
 					{% if user.is_authenticated %}
 					<li class="nav-item dropdown">
 						<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -92,44 +103,10 @@
                 
             <div class="container">
                 <div class="row">
-					
 					<!--Page content for each page-->
 					{% block content %}
                     {% endblock %}
 					<!--End Page Content-->
-					
-					<!--Search widget-->
-					<div class="col-md-4">
-						<!-- Search Widget -->
-						<div class="card my-4">
-						  <h5 class="card-header">Search</h5>
-						  <div class="card-body">
-							<div class="input-group">
-							  <input type="text" class="form-control" placeholder="Search for...">
-							  <span class="input-group-btn">
-								<button class="btn btn-secondary" type="button">Go!</button>
-							  </span>
-							</div>
-						  </div>
-						</div>
-						
-						<!-- Side Widget -->
-						<div class="card my-4">
-							<h5 class="card-header bg-success text-white">Side Widget</h5>
-							<div class="card-body">
-								You can put anything you want inside of these side widgets. They are easy to use, and feature the new Bootstrap 4 card containers!
-							</div>
-						</div>
-						
-						<div class="card my-4">
-							<h5 class="card-header bg-primary text-white">Welcome!</h5>
-							<div class="card-body text-center">
-								This is my first Microblog on Internet and now I have <b>{% total_post %}</b> articles and
-								have <b>{% total_user %}</b> Users registered.
-							</div>
-						</div>
-						
-					</div>
 				</div>
             </div>
             

@@ -81,6 +81,9 @@
 						<div class="dropdown-menu" aria-labelledby="navbarDropdown">
 							<a class="dropdown-item" href="{% url 'post_new' %}">Create New Post</a>
 							<div class="dropdown-divider"></div>
+							{% if user.is_superuser %}
+							<a class="dropdown-item" href="/admin/">Admin</a>
+							{% endif %}
 							<a class="dropdown-item" href="{% url 'logout' %}">Logout</a>
 						</div>
 					</li>

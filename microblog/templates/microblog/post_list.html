@@ -1,16 +1,22 @@
 {% extends "base.html" %}
 {% block title %}Navhi Microblog - Articles{% endblock %}
 {% block content %}		
-<div class="col-lg-8">
-	<h4><small>RECENT POSTS</small></h4>
-	<hr>
+<div class="col-md-8">
+	<br />
 	{% for post in posts %}
-		<h1><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></h1>
-		<h4><small><span class="glyphicon glyphicon-time"></span> {{ post.created }}</small></h4>
-		{% autoescape off %}
-		<p class="text-justify">{{ post.body|truncatewords:80|striptags|linebreaks }}</p>
-		{% endautoescape %}
-		<hr>
+	<div class="card mb-4">
+		<img class="card-img-top" src="http://placehold.it/750x300" alt="Card image cap">
+		<div class="card-body">
+			<h2 href="card-title">{{ post.title }}</h2>
+			{% autoescape off %}
+				<p class="card-text">{{ post.body|truncatewords:80|striptags|linebreaks }}</p>
+				<a href="{{ post.get_absolute_url }}">Read More &rarr;</a>
+			{% endautoescape %}	
+		</div>
+		<div class="card-footer text-muted">
+			<i class="fa fa-calendar" aria-hidden="true"></i> {{ post.created }}
+		</div>
+	</div>
 	{% endfor %}
 	
 	<!--Pagination function goes here-->		

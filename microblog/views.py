@@ -5,9 +5,9 @@ from django.urls import reverse_lazy
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.forms import UserCreationForm
 from django.views.decorators.csrf import csrf_protect
-from django.template import RequestContext
 from django.http import HttpResponseRedirect, HttpResponse
-from microblog.forms import *
+from django.core.files.storage import FileSystemStorage
+from .forms import *
 from .models import Post
 # from .forms import NewPostForm
 

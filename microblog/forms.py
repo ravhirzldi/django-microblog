@@ -1,8 +1,9 @@
-import re
 from django import forms
 from django.contrib.auth.models import User
 from django.utils.translation import ugettext_lazy as _
 
+# This form will be shown at registration form at register page
+# All fields are from default user fields at admin page
 class RegistrationForm(forms.Form):
  
     username = forms.RegexField(regex=r'^\w+$', widget=forms.TextInput(attrs=dict(required=True, max_length=30)), label=_("Username"), error_messages={ 'invalid': _("This value must contain only letters, numbers and underscores.") })
@@ -11,7 +12,8 @@ class RegistrationForm(forms.Form):
     password2 = forms.CharField(widget=forms.PasswordInput(attrs=dict(required=True, max_length=30, render_value=False)), label=_("Password (again)"))
     first_name = forms.CharField(widget=forms.TextInput(attrs=dict(required=True, max_length=150)), label=_("First name"))
     last_name = forms.CharField(widget=forms.TextInput(attrs=dict(required=True, max_length=150)), label=_("Last name"))
- 
+    
+    # This function is for error handling if object exist it will thrown an error
     def clean_username(self):
         try:
             user = User.objects.get(username__iexact=self.cleaned_data['username'])

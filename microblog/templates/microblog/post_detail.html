@@ -8,6 +8,12 @@
 			<h2 href="card-title">{{ post.title }}</h2>
 			<hr />
 			<div id="post">
+				{% if post.header_img %}
+				<img class="img-fluid rounded mx-auto d-block" src="{{ post.header_img.url }}" alt="{{ post.header_img.name }}">
+				{% else %}
+				<img class="img-fluid rounded mx-auto d-block" src="http://via.placeholder.com/750x350" alt="Default Image">
+				{% endif %}
+				<hr/>
 				<!--Full post content goes here-->
 				<p class="lead">{{post.body|safe}}</p>
 			</div>

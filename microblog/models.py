@@ -3,6 +3,8 @@ from django.contrib.auth.models import User
 from django.utils import timezone
 from django.core.urlresolvers import reverse
 from django.template.defaultfilters import slugify
+
+# Third Parties Libraries
 from ckeditor_uploader.fields import RichTextUploadingField
 from taggit.managers import TaggableManager
 
@@ -26,6 +28,7 @@ class Post(models.Model):
     slug = models.SlugField(max_length=250,
                             unique_for_date='publish')
     author = models.ForeignKey(User)
+    header_img = models.ImageField(upload_to='images/%Y/%m/%d', blank=True)
     body = RichTextUploadingField('body')
     publish = models.DateTimeField(default=timezone.now)
     created = models.DateTimeField(auto_now_add=True)
@@ -49,6 +52,10 @@ class Post(models.Model):
         if not self.id:
             self.slug = slugify(self.title)
         super(Post, self).save(*args, **kwargs)
+        
+    def photo_url(self):
+        if self.header_img and hasattr(self.header_img, 'url'):
+            return self.header_img.url
         
     
     # Reversing URl to post_detail so get URL like,

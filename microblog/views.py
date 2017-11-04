@@ -8,7 +8,6 @@ from django.views.decorators.csrf import csrf_protect
 from django.http import HttpResponseRedirect, HttpResponse
 from .forms import *
 from .models import Post
-# from .forms import NewPostForm
 
 # Create your views here.
 class PostListView(ListView):
@@ -41,7 +40,7 @@ def post_detail(request, year, month, day, post):
 class CreateNewPost(CreateView):
     model = Post
     template_name = 'microblog/post_new.html'
-    fields = 'title', 'author', 'body', 'status', 'tags'
+    fields = 'title', 'author', 'header_img', 'body', 'status', 'tags'
     
 class DeletePost(DeleteView):
     model = Post
@@ -50,7 +49,7 @@ class DeletePost(DeleteView):
 class EditPost(UpdateView):
     model = Post
     template_name = 'microblog/post_edit.html'
-    fields = 'title', 'author', 'body', 'status', 'tags'
+    fields = 'title', 'author', 'header_img', 'body', 'status', 'tags'
     
 def About(request):
     return render(request,'microblog/about.html')

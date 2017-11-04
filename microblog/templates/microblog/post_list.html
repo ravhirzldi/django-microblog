@@ -5,7 +5,11 @@
 	<br />
 	{% for post in posts %}
 	<div class="card mb-4">
-		<img class="card-img-top" src="http://placehold.it/750x300" alt="Card image cap">
+		{% if post.header_img %}
+		<img class="card-img-top img-fluid img-responsive" src="{{ post.header_img.url }}" alt="{{ post.header_img.name }}">
+		{% else %}
+		<img class="card-img-top img-fluid img-responsive" src="http://via.placeholder.com/750x350" alt="Default Image">
+		{% endif %}
 		<div class="card-body">
 			<h2 href="card-title">{{ post.title }}</h2>
 			{% autoescape off %}

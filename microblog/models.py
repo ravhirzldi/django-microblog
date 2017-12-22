@@ -7,6 +7,7 @@ from django.template.defaultfilters import slugify
 # Third Parties Libraries
 from ckeditor_uploader.fields import RichTextUploadingField
 from taggit.managers import TaggableManager
+from image_cropping import ImageRatioField, ImageCropField
 
 # Create your models here.
 class PublishedManager(models.Manager):
@@ -28,7 +29,6 @@ class Post(models.Model):
     slug = models.SlugField(max_length=250,
                             unique_for_date='publish')
     author = models.ForeignKey(User)
-    header_img = models.ImageField(upload_to='images/%Y/%m/%d', blank=True)
     body = RichTextUploadingField('body')
     publish = models.DateTimeField(default=timezone.now)
     created = models.DateTimeField(auto_now_add=True)
@@ -37,6 +37,8 @@ class Post(models.Model):
                               choices=STATUS_CHOICES,
                               default='draft')
     tags = TaggableManager()
+    image = ImageCropField(blank=True, upload_to='post/images/%Y/%m/%d')
+    cropping = ImageRatioField('image', '750x350')
     
     objects = models.Manager()
     published = PublishedManager()

@@ -1,5 +1,7 @@
 {% load costume_tags %}
 {% load static %}
+{% load taggit_templatetags2_tags %}
+{% get_taglist as tags %}
 <!--Search widget-->
 <div class="col-md-4">
 	<div class="card my-4">
@@ -15,6 +17,15 @@
 	</div>
 						
 	<!-- Side Widget -->
+	<div class="card my-4">
+		<h5 class="card-header">Categories</h5>
+		<ul class="list-group list-group-flush">
+			{% for tag in tags %}
+				<li class="list-group-item"><a href="{% url 'tagged' tag.slug %}">{{tag}} ({{tag.num_times}})</a></li>
+			{% endfor %}
+		</ul>
+	</div>
+	
 	<div class="card my-4">
 		<div class="card-body">
 			<a class="twitter-timeline" data-height="800" href="https://twitter.com/NASA?ref_src=twsrc%5Etfw">Tweets by NASA</a> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>

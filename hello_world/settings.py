@@ -30,7 +30,6 @@ ALLOWED_HOSTS = ['127.0.0.1', 'ravhirizaldi.pythonanywhere.com']
 # Application definition
 
 INSTALLED_APPS = [
-    'cloudinary_storage',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -42,8 +41,18 @@ INSTALLED_APPS = [
     'ckeditor_uploader',
     'taggit',
     'crispy_forms',
-    'cloudinary',
+    'easy_thumbnails',
+    'image_cropping',
+    'taggit_templatetags2',
 ]
+
+from easy_thumbnails.conf import Settings as thumbnail_settings
+THUMBNAIL_PROCESSORS = (
+    'image_cropping.thumbnail_processors.crop_corners',
+) + thumbnail_settings.THUMBNAIL_PROCESSORS
+
+IMAGE_CROPPING_BACKEND = 'image_cropping.backends.easy_thumbs.EasyThumbnailsBackend'
+IMAGE_CROPPING_BACKEND_PARAMS = {}
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -130,7 +139,6 @@ STATIC_ROOT = os.path.join(PROJECT_DIR, 'static')
 
 MEDIA_URL = "/media/"
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
-DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 
 CKEDITOR_UPLOAD_SLUGIFY_FILENAME = False
 CKEDITOR_UPLOAD_PATH = "uploads/"
@@ -161,9 +169,3 @@ LOGOUT_REDIRECT_URL = '/'
 LOGIN_URL = 'microblog_login'
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
-
-CLOUDINARY_STORAGE = {
-    'CLOUD_NAME': 'navhi',
-    'API_KEY': '583591894129974',
-    'API_SECRET': 'Nzn2-SsbBYpkoDPl3KrcVampCig'
-}

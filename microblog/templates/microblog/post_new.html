@@ -9,7 +9,6 @@
         <div class="card-body">
             <form action="{{ action_url }}" method="post" accept-charset="utf-8">
                 {{ form|crispy }}
-                {{ form.media }}
                 {% csrf_token %}
                 <p><input type="submit" class="btn btn-success btn-block" value="Save"></p>
             </form>

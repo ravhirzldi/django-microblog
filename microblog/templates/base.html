@@ -2,7 +2,6 @@
     <html lang="en">
         {% load costume_tags %}
 		{% load static %}
-		{% load cloudinary %}
         <head>
             <meta charset="utf-8">
             <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -19,7 +18,7 @@
             
             <!--Disqus Meta Tag configuration-->
             <script type="text/javascript">
-            var disqus_developer = 0;
+            var disqus_developer = 1;
             var disqus_url = '{{ request.build_absolute_uri }}';
             </script>
 			
@@ -37,11 +36,13 @@
 				setfooter();
 			}, true);
 			</script>
+			
+			{{ form.media }}
             
             <!--Facebook meta tag for sharing button configuration-->
             <meta property="og:url"           content="{{ request.build_absolute_uri }}" />
             <meta property="og:type"          content="website" />
-            <meta property="og:title"         content="{{ post.title }}" />
+            <meta property="og:title"         content="{{ post.title|capfirst }}" />
             <meta property="og:description"   content="{{ post.body|truncatewords:5|striptags }}" />
             
             <title>{% block title %}{% endblock %}</title>

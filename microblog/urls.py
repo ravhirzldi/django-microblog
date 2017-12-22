@@ -1,6 +1,6 @@
 # microblog/urls.py
 from django.conf.urls import url, include
-from .views import PostListView, post_detail, CreateNewPost, EditPost
+from .views import PostListView, post_detail, CreateNewPost, EditPost, TagIndexView
 from . import views
 
 urlpatterns = [
@@ -22,4 +22,6 @@ urlpatterns = [
     url(r'^post/edit/(?P<pk>\d+)$', views.EditPost.as_view(), name='post_edit'),
     #About
     url(r'about/$', views.About, name='about'),
+    #Filter by Tags
+    url(r'^tag/(?P<slug>[-\w]+)/$', TagIndexView.as_view(), name='tagged'),
 ]

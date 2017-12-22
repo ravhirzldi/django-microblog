@@ -9,7 +9,15 @@ from django.http import HttpResponseRedirect, HttpResponse
 from .forms import *
 from .models import Post
 
+from taggit.models import Tag
+
 # Create your views here.
+class TagMixin(object):
+    def get_context_data(self, **kwargs):
+        context = super(TagMixin, self).get_context_data(**kwargs)
+        context['tags'] = Tag.objects.all()
+        return context
+
 class PostListView(ListView):
     # This class is for paginating pages if content reach certain number
     # So, if you have 10 posts/articles it still showing 5 and the other is in another page
@@ -40,7 +48,7 @@ def post_detail(request, year, month, day, post):
 class CreateNewPost(CreateView):
     model = Post
     template_name = 'microblog/post_new.html'
-    fields = 'title', 'author', 'header_img', 'body', 'status', 'tags'
+    fields = 'title', 'image', 'author', 'body', 'status', 'tags'
     
 class DeletePost(DeleteView):
     model = Post
@@ -49,10 +57,19 @@ class DeletePost(DeleteView):
 class EditPost(UpdateView):
     model = Post
     template_name = 'microblog/post_edit.html'
-    fields = 'title', 'author', 'header_img', 'body', 'status', 'tags'
+    fields = 'title', 'image','author', 'body', 'status', 'tags'
     
 def About(request):
     return render(request,'microblog/about.html')
+
+class TagIndexView(TagMixin, ListView):
+    template_name = 'microblog/post_list.html'
+    model = Post
+    paginate_by = 4
+    context_object_name = 'posts'
+    
+    def get_queryset(self):
+        return Post.objects.filter(tags__slug=self.kwargs.get('slug'))
     
 @csrf_protect
 def register(request):

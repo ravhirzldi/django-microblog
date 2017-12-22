@@ -1,8 +1,11 @@
 from django.contrib import admin
 from .models import Post
 
+# Third Parties Libraries
+from image_cropping import ImageCroppingMixin
+
 # Register your models here.
-class PostAdmin(admin.ModelAdmin):
+class PostAdmin(ImageCroppingMixin, admin.ModelAdmin):
     list_display = ('title', 'slug', 'author', 'publish', 'status')
     list_filter = ('author', 'created', 'status', 'publish')
     search_fields = ('title', 'body')

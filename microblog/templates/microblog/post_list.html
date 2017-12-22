@@ -1,27 +1,47 @@
 {% extends "base.html" %}
 {% block title %}Navhi Microblog - Articles{% endblock %}
-{% block content %}		
-<div class="col-md-8">
+{% block content %}
+{% load thumbnail %}
+{% load taggit_templatetags2_tags %}
+{% get_taglist as tags %}
+
+	<div class="col-md-8">
 	<br />
+	<nav aria-label="breadcrumb" role="navigation">
+		<ol class="breadcrumb">
+			{% if request.get_full_path == '/' %}
+				<li class="breadcrumb-item active" aria-current="page">Home</li>
+			{% else %}
+				{% for tag in tags %}
+					{% url 'tagged' tag.slug as tag_url %}
+					{% if request.get_full_path == tag_url %}
+						<li class="breadcrumb-item" aria-current="page"><a href="{% url 'post_list' %}">Home</a></li>
+						<li class="breadcrumb-item active" aria-current="page">{{tag}}</li>
+					{% endif %}
+				{% endfor %}
+			{% endif %}
+		</ol>
+	</nav>
+	
 	{% for post in posts %}
-	<div class="card mb-4">
-		{% if post.header_img %}
-		<img class="card-img-top img-fluid img-responsive" src="{{ post.header_img.url }}" alt="{{ post.header_img.name }}">
-		{% else %}
-		<img class="card-img-top img-fluid img-responsive" src="http://via.placeholder.com/750x350" alt="Default Image">
-		{% endif %}
-		<div class="card-body">
-			<h2 href="card-title">{{ post.title }}</h2>
-			{% autoescape off %}
-				<p class="card-text">{{ post.body|truncatewords:80|striptags|linebreaks }}</p>
-				<a href="{{ post.get_absolute_url }}">Read More &rarr;</a>
-			{% endautoescape %}	
+		<div class="card mb-4">
+			{% if post.image %}
+			<img class="card-img-top img-fluid img-responsive" src="{% thumbnail post.image 750x350 box=post.cropping crop detail %}">
+			{% else %}
+			<img class="card-img-top img-fluid img-responsive" src="http://via.placeholder.com/750x350" alt="Default Image">
+			{% endif %}
+			<div class="card-body">
+				<h2 href="card-title">{{ post.title|capfirst }}</h2>
+				{% autoescape off %}
+					<p class="card-text">{{ post.body|truncatewords:80|striptags|linebreaks|lower }}</p>
+					<a href="{{ post.get_absolute_url }}">Read More &rarr;</a>
+				{% endautoescape %}	
+			</div>
+			<div class="card-footer text-muted text-center">
+				<i class="fa fa-calendar" aria-hidden="true"></i> {{ post.publish|date:"D d M Y" }} &nbsp &nbsp
+				<i class="fa fa-user" aria-hidden="true"></i> {{ post.author }}
+			</div>
 		</div>
-		<div class="card-footer text-muted">
-			<i class="fa fa-calendar" aria-hidden="true"></i> {{ post.publish }}
-			<i class="fa fa-user" aria-hidden="true"></i> {{ post.author }}
-		</div>
-	</div>
 	{% endfor %}
 	
 	<!--Pagination function goes here-->		

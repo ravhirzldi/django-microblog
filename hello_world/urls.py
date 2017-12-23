@@ -25,8 +25,8 @@ urlpatterns = [
     # include URL pattern from microblog/urls.py
     url(r'', include('microblog.urls')),
     # Login and logout URL
-    url(r'^login/', include('django.contrib.auth.urls')),
+    #url(r'^login/', include('django.contrib.auth.urls')),
     url(r'^ckeditor/', include('ckeditor_uploader.urls')),
-    url(r'^register/$', register),
-    url(r'^register/success/$', register_success),
+    #url(r'^register/$', register),
+    #url(r'^register/success/$', register_success),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT) + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

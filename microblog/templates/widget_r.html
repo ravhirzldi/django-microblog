@@ -10,7 +10,7 @@
 			<div class="input-group">
 				<input type="text" class="form-control" placeholder="Search for...">
                     <span class="input-group-btn">
-						<button class="btn btn-secondary" type="button">Go!</button>
+						<button class="btn btn-outline-secondary waves-effect" type="button">Go!</button>
 					</span>
 			</div>
 		</div>
@@ -18,10 +18,13 @@
 						
 	<!-- Side Widget -->
 	<div class="card my-4">
-		<h5 class="card-header">Categories</h5>
+		<h5 class="responsive card-header">Categories</h5>
 		<ul class="list-group list-group-flush">
 			{% for tag in tags %}
-				<li class="list-group-item"><a href="{% url 'tagged' tag.slug %}">{{tag}} ({{tag.num_times}})</a></li>
+				<li class="list-group-item d-flex justify-content-between align-items-center">
+					<a href="{% url 'tagged' tag.slug %}">{{tag}}</a>
+					<span class="badge badge-primary badge-pill">{{tag.num_times}}</span>
+				</li>
 			{% endfor %}
 		</ul>
 	</div>

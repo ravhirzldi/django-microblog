@@ -10,17 +10,17 @@
             
             {% if request.get_full_path == "/" %}
             <li class="nav-item active">
-                <a class="nav-link" href="/"><i class="fa fa-home"></i> Home <span class="sr-only">(current)</span></a>
+				<a class="nav-link" href="/"><i class="fa fa-home"></i> Home</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="{% url 'about' %}"><i class="fa fa-phone"></i> About</a>
+                <a class="nav-link" href="{% url 'about' %}"><i class="fa fa-phone"></i> About<span class="sr-only">(current)</span></a>
             </li>
             {% else %}
             <li class="nav-item">
-                <a class="nav-link" href="/"><i class="fa fa-home"></i> Home</a>
+				<a class="nav-link" href="/"><i class="fa fa-home"></i> Home <span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item active">
-                <a class="nav-link" href="{% url 'about' %}"><i class="fa fa-phone"></i> About<span class="sr-only">(current)</span></a>
+				<a class="nav-link" href="{% url 'about' %}"><i class="fa fa-phone"></i> About</a>
             </li>
 			{% endif %}
         </ul>

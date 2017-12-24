@@ -60,7 +60,8 @@ class EditPost(UpdateView):
     fields = 'title', 'image','author', 'body', 'status', 'tags'
     
 def About(request):
-    return render(request,'microblog/about.html')
+    about = request.path
+    return render(request,'microblog/about.html', {'about': about})
 
 class TagIndexView(TagMixin, ListView):
     template_name = 'microblog/post_list.html'

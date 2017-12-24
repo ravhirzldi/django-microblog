@@ -12,7 +12,7 @@
 		<div class="card mb-4">
 			{% if post.image %}
 			    <div class="view overlay hm-white-slight">
-					<img src="{% thumbnail post.image 750x350 box=post.cropping crop detail %}" class="img-fluid" alt="">
+					<img src="{% thumbnail post.image 750x350 box=post.cropping crop detail %}" class="img-fluid" alt="{{post.title|lower}}">
 					<a href="{{ post.get_absolute_url }}">
 						<div class="mask"></div>
 					</a>
@@ -26,7 +26,14 @@
 				</div>
 			{% endif %}
 			<div class="card-body">
-				<h4 href="card-title">{{ post.title|capfirst }}</h2>
+				<div class="d-flex justify-content-between">
+					<div class="p-2"><h4 href="card-title">{{ post.title|capfirst }}</h4></div>
+					<div class="p-2">
+						<a data-toggle="modal" data-target="#Modal-{{post.title|slugify}}">
+							<i class="fa fa-share-alt fa-lg" aria-hidden="true"></i>
+						</a>
+					</div>
+				</div>
 				<hr>
 				{% autoescape off %}
 					<p class="card-text">{{ post.body|truncatewords:80|striptags|linebreaks|lower }}</p>
@@ -37,11 +44,41 @@
 			</div>
 			<div class="card-footer bg-transparent text-muted text-center">
 				<i class="fa fa-calendar" aria-hidden="true"></i> {{ post.publish|date:"D d M Y" }} &nbsp &nbsp
-				<i class="fa fa-user" aria-hidden="true"></i> {{ post.author }}
+				<i class="fa fa-user" aria-hidden="true"></i> {{ post.author }} &nbsp &nbsp
+				<i class="fa fa-comment" aria-hidden="true">
+					<span class="disqus-comment-count" data-disqus-url="http://ravhirizaldi.pythonanywhere.com{{ post.get_absolute_url }}#disqus_thread">No Comments</span>
+				</i>
 			</div>
 		</div>
 	</div>
-		
+	
+	<!-- Modal -->
+	<div class="modal fade" id="Modal-{{post.title|slugify}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	  <div class="modal-dialog" role="document">
+		<div class="modal-content">
+		  <div class="modal-header">
+			<h5 class="modal-title" id="exampleModalLabel">Share "{{post.title}}"</h5>
+			<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+			  <span aria-hidden="true">&times;</span>
+			</button>
+		  </div>
+		  <div class="modal-body text-center">
+			<a class="btn btn-social-icon btn-twitter">
+				<span class="fa fa-twitter"></span>
+			</a>
+			<a class="btn btn-social-icon btn-facebook">
+				<span class="fa fa-facebook"></span>
+			</a>
+			<a class="btn btn-social-icon btn-google">
+				<span class="fa fa-google"></span>
+			</a>
+			<a class="btn btn-social-icon btn-pinterest">
+				<span class="fa fa-pinterest"></span>
+			</a>
+		  </div>
+		</div>
+	  </div>
+	</div>	
 	{% endfor %}
 	
 	<!--Pagination function goes here-->		

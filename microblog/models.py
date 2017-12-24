@@ -3,6 +3,9 @@ from django.contrib.auth.models import User
 from django.utils import timezone
 from django.core.urlresolvers import reverse
 from django.template.defaultfilters import slugify
+from django.utils.timezone import utc
+from django.utils import formats
+import datetime
 
 # Third Parties Libraries
 from ckeditor_uploader.fields import RichTextUploadingField
@@ -55,11 +58,6 @@ class Post(models.Model):
             self.slug = slugify(self.title)
         super(Post, self).save(*args, **kwargs)
         
-    def photo_url(self):
-        if self.header_img and hasattr(self.header_img, 'url'):
-            return self.header_img.url
-        
-    
     # Reversing URl to post_detail so get URL like,
     # ../(year)/(month)/(day)/slug
     def get_absolute_url(self):

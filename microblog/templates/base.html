@@ -1,41 +1,33 @@
 <!DOCTYPE html>
-    <html lang="en">
-        {% load costume_tags %}
-		{% load static %}
-        <head>
-            <meta charset="utf-8">
-            <meta http-equiv="X-UA-Compatible" content="IE=edge">
-            <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-			<meta author="Ravhi Rizaldi">
-            
-			<!-- Latest compiled and minified Bootstrap 4 Beta 4 -->
-			<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" />
-			<link rel="stylesheet" type="text/css" href="{% static 'css/mdb.min.css' %}" />
-			<link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}" />
-			<link rel="stylesheet" type="text/css" href="{% static 'css/microblog.css' %}" />
-			<link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap-social.css' %}"/>
-			<link rel="stylesheet" type="text/css" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" />
+<html lang="en">
+	{% load costume_tags %}
+	{% load static %}
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		<meta author="Ravhi Rizaldi">
+		
+		{% include 'stylesheet.html' %}
+		
+		<title>{% block title %}{% endblock %}</title>
+	</head>
+	
+	<body>
+		{% include 'navbar.html' %}
+		{% include 'property.html' %}
 			
-			<!--Custome Font-->
-			<link href="http://fonts.googleapis.com/css?family=Lobster&subset=latin,latin-ext" rel="stylesheet" type="text/css">    
-            
-            <title>{% block title %}{% endblock %}</title>
-        </head>
-        
-        <body>
-			{% include 'navbar.html' %}
-			{% include 'property.html' %}
-                
-            <div class="container">
-                <div class="row">
-					<!--Page content for each page-->
-					{% block content %}
-                    {% endblock %}
-					<!--End Page Content-->
-				</div>
-            </div>
-            
-			{% include 'footer.html' %}
-			{% include 'javascript.html' %}
-        </body>
-    </html>
+		<div class="container">
+			<div class="row">
+					<br/>
+				<!--Page content for each page-->
+				{% block content %}
+				{% endblock %}
+				<!--End Page Content-->
+			</div>
+		</div>
+		
+		{% include 'footer.html' %}
+		{% include 'javascript.html' %}
+	</body>
+</html>

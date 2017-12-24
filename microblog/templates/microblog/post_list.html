@@ -65,7 +65,7 @@
 		<a class="btn btn-lg btn-social-icon btn-twitter">
 			<span class="fa fa-twitter"></span>
 		</a>
-		<a href="https://www.facebook.com/sharer/sharer.php?u=http://ravhirizaldi.pyhonanywhere.com{{post.get_absolute_url}}&amp;src=sdkpreparse" class="btn btn-lg btn-social-icon btn-facebook">
+		<a class="btn btn-lg btn-social-icon btn-facebook" href="http://www.facebook.com/sharer/sharer.php?u=http://ravhirizaldi.pythonanywhere.com{{post.get_absolute_url|urlencode}}">
 			<span class="fa fa-facebook"></span>
 		</a>
 		<a class="btn btn-lg btn-social-icon btn-google">
@@ -77,7 +77,7 @@
 	  </div>
 	</div>
   </div>
-</div>	
+</div>
 {% endfor %}
 
 <!--Pagination function goes here-->		

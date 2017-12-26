@@ -1,10 +1,13 @@
 {% extends "base.html" %}
 {% block title %}{{ post.title }}{% endblock %}
+{% block javascript %}
+{% endblock %}
 {% block content %}
 {% load thumbnail %}
 {% load taggit_templatetags2_tags %}
 {% get_taglist as tags %}
 	<div class="col-lg-8">
+		<a href="javascript:void(0);" id="scroll" title="Scroll to Top" style="display: none;">Top<span></span></a>
 		<br />
 		{% if user.is_authenticated %}
 			<!-- Modal -->
@@ -30,6 +33,7 @@
 			</div>	
 		{% endif %}
 		
+		<div class="post-wrapper wow fadeIn" data-wow-delay="0.4">
 		<div class="card mb-4">
 			<div class="card-body">
 				{% if user.is_authenticated %}
@@ -45,7 +49,6 @@
 				<h2 href="card-title">{{ post.title|capfirst }}</h2>
 				{% endif %}
 				<hr />
-				<div id="post">
 					{% if post.image %}
 					<img class="card-img-top img-fluid img-responsive" src="{% thumbnail post.image 750x350 box=post.cropping crop detail %}" alt="{{ post.title }}">
 					{% else %}
@@ -54,7 +57,6 @@
 					<hr/>
 					<!--Full post content goes here-->
 					<p class="lead">{{post.body|safe}}</p>
-				</div>
 			</div>
 			<div class="card-footer text-muted">
 				<div class="row">
@@ -68,6 +70,16 @@
 				</div>
 			</div>
 		</div>
+		</div>
+		
+		<aside id="sticky-social">
+			<ul>
+				<li><a href="http://www.facebook.com/sharer/sharer.php?u=http://ravhirizaldi.pythonanywhere.com{{post.get_absolute_url|urlencode}}" class="entypo-facebook" target="_blank"><span>Facebook</span></a></li>
+				<li><a href="https://twitter.com/intent/tweet?url=http%3A%2F%2Fravhirizaldi.pythonanywhere.com{{post.get_absolute_url|urlencode}}&text={{ post.body|truncatewords:8|striptags|lower }}" class="entypo-twitter" target="_blank"><span>Twitter</span></a></li>
+				<li><a href="https://plus.google.com/share?url=http%3A%2F%2Fravhirizaldi.pythonanywhere.com{{post.get_absolute_url|urlencode}}" class="entypo-gplus" target="_blank"><span>Google+</span></a></li>
+				<li><a href="http://pinterest.com/pin/create/button/?url=http%3A%2F%2Fravhirizaldi.pythonanywhere.com&description={{ post.body|truncatewords:10|striptags|lower }}" class="entypo-pinterest" target="_blank"><span>Pinterest</span></a></li>
+			</ul>
+		</aside>
 		
 		<!--Disqus comment plugin-->
 		<div id="disqus_thread"></div>
@@ -83,6 +95,6 @@
 	</div>
 	
 	<!-- Floating Share Buttons -->
-	<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5a3f39b38a410d4a"></script>
+	<!--<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5a3f39b38a410d4a"></script>-->
 	{% include 'widget_r.html' %}
 {% endblock %}

@@ -5,6 +5,7 @@
 {% load taggit_templatetags2_tags %}
 {% get_taglist as tags %}
 <div class="col-lg-8">
+<a href="javascript:void(0);" id="scroll" title="Scroll to Top" style="display: none;">Top<span></span></a>
 <br />
 {% for post in posts %}
 <div class="post-wrapper wow fadeIn" data-wow-delay="0.4">
@@ -62,16 +63,16 @@
 		</button>
 	  </div>
 	  <div class="modal-body text-center">
-		<a class="btn btn-lg btn-social-icon btn-twitter">
+		<a class="btn btn-lg btn-social-icon btn-twitter" href="https://twitter.com/intent/tweet?url=http%3A%2F%2Fravhirizaldi.pythonanywhere.com{{post.get_absolute_url|urlencode}}&text={{ post.body|truncatewords:8|striptags|lower }}">
 			<span class="fa fa-twitter"></span>
 		</a>
 		<a class="btn btn-lg btn-social-icon btn-facebook" href="http://www.facebook.com/sharer/sharer.php?u=http://ravhirizaldi.pythonanywhere.com{{post.get_absolute_url|urlencode}}">
 			<span class="fa fa-facebook"></span>
 		</a>
-		<a class="btn btn-lg btn-social-icon btn-google">
+		<a class="btn btn-lg btn-social-icon btn-google" href="https://plus.google.com/share?url=http%3A%2F%2Fravhirizaldi.pythonanywhere.com{{post.get_absolute_url|urlencode}}">
 			<span class="fa fa-google"></span>
 		</a>
-		<a class="btn btn-lg btn-social-icon btn-pinterest">
+		<a class="btn btn-lg btn-social-icon btn-pinterest" href="http://pinterest.com/pin/create/button/?url=http%3A%2F%2Fravhirizaldi.pythonanywhere.com&description={{ post.body|truncatewords:10|striptags|lower }}">
 			<span class="fa fa-pinterest"></span>
 		</a>
 	  </div>

@@ -1,6 +1,23 @@
+{% load static %}
 <!--All Script put in here to make page loading faster-->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.4.3/js/mdb.min.js"></script>
-<script id="dsq-count-scr" src="//navhi-microblog.disqus.com/count.js" async></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js"></script>
+<script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.4.3/js/mdb.min.js"></script>
+<script type="text/javascript" id="dsq-count-scr" src="//navhi-microblog.disqus.com/count.js" async></script>
+
+<script type="text/javascript">
+$(document).ready(function(){
+    $(window).scroll(function(){
+        if($(this).scrollTop() > 100){
+            $('#scroll').fadeIn();
+        }else{
+            $('#scroll').fadeOut();
+        }
+    });
+    $('#scroll').click(function(){
+        $("html, body").animate({ scrollTop: 0 }, 600);
+        return false;
+    });
+});
+</script>

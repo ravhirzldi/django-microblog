@@ -42,9 +42,8 @@ INSTALLED_APPS = [
     'ckeditor_uploader',
     'taggit',
     'crispy_forms',
-    'easy_thumbnails',
-    'image_cropping',
     'taggit_templatetags2',
+    'django_user_agents',
 ]
 
 from easy_thumbnails.conf import Settings as thumbnail_settings

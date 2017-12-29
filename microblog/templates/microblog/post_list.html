@@ -1,18 +1,22 @@
 {% extends "base.html" %}
-{% block title %}Navhi Microblog - Articles{% endblock %}
+{% block title %}Navhi Blog - Articles{% endblock %}
 {% block content %}
-{% load thumbnail %}
 {% load taggit_templatetags2_tags %}
 {% get_taglist as tags %}
 <div class="col-lg-8">
 <a href="javascript:void(0);" id="scroll" title="Scroll to Top" style="display: none;">Top<span></span></a>
+<script>
+			var logoHeight=$("#imgfit img").height();if(logoHeight<350){var margintop=(350-logoHeight)/2;$("#imgfit img").css("margin-top",margintop);}
+	</script>
 <br />
 {% for post in posts %}
 <div class="post-wrapper wow fadeIn" data-wow-delay="0.4">
 	<div class="card mb-4">
 		{% if post.image %}
 			<div class="view overlay hm-white-slight">
-				<img src="{% thumbnail post.image 750x350 box=post.cropping crop detail %}" class="img-fluid" alt="{{post.title|lower}}">
+				<div id="imgfit">
+						<img class="card-img-top img-fluid img-responsive" src="{{post.image.url}}" alt="{{ post.title }}">
+					</div>
 				<a href="{{ post.get_absolute_url }}">
 					<div class="mask"></div>
 				</a>

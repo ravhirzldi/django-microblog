@@ -2,6 +2,7 @@
 <html lang="en">
 	{% load costume_tags %}
 	{% load static %}
+	{% load user_agents %}
 	<head>
 		<meta charset="utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -21,9 +22,14 @@
 		<meta property="og:site_name" content="http://ravhirizaldi.pythonanywhere.com">
 		<meta property="og:url" content="http://ravhirizaldi.pythonanywhere.com{{ post.get_absolute_url }}">
 		<meta property="og:image" content="http://ravhirizaldi.pythonanywhere.com{{post.image.url}}">
-		<meta property="article:published_time" content="{{post.publish}}">
+		<meta property="article:published_time" content="{{post.publish|date:"c"}}">
 		<meta property="article:author" content="https://www.facebook.com/ravhirizaldi">
 		<meta property="fb:app_id" content="185072975386514">
+		
+		<!--Twitter Meta Tags-->
+		<meta name="twitter:card" content="summary" />
+		<meta name="twitter:site" content="@ravhirzldi" />
+		<meta name="twitter:creator" content="@ravhirzldi" />
 		
 		{% include 'stylesheet.html' %}
 		{% block javascript %} {% endblock %}
@@ -34,8 +40,12 @@
 	<body>
 		{% include 'navbar.html' %}
 		{% include 'property.html' %}
-			
+		
+		{% if request|is_mobile %}	
+		<div class="container-fluid">
+		{% else %}
 		<div class="container">
+		{% endif %}
 			<div class="row">
 					<br/>
 				<!--Page content for each page-->

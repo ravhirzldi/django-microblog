@@ -3,14 +3,11 @@ from django.contrib.auth.models import User
 from django.utils import timezone
 from django.core.urlresolvers import reverse
 from django.template.defaultfilters import slugify
-from django.utils.timezone import utc
-from django.utils import formats
-import datetime
 
 # Third Parties Libraries
 from ckeditor_uploader.fields import RichTextUploadingField
 from taggit.managers import TaggableManager
-from image_cropping import ImageRatioField, ImageCropField
+# from image_cropping import ImageRatioField, ImageCropField
 
 # Create your models here.
 class PublishedManager(models.Manager):
@@ -40,8 +37,8 @@ class Post(models.Model):
                               choices=STATUS_CHOICES,
                               default='draft')
     tags = TaggableManager()
-    image = ImageCropField(blank=True, upload_to='post/images/%Y/%m/%d')
-    cropping = ImageRatioField('image', '750x350')
+    image = models.ImageField(blank=True, upload_to='post/images/%Y/%m/%d')
+    # cropping = ImageRatioField('image', '750x350')
     
     objects = models.Manager()
     published = PublishedManager()
@@ -53,7 +50,7 @@ class Post(models.Model):
         return self.title
     
     def save(self, *args, **kwargs):
-        # If slug failed to created it will be automatically created after you save
+        # If slug failed to created it will be automatically created after save
         if not self.id:
             self.slug = slugify(self.title)
         super(Post, self).save(*args, **kwargs)

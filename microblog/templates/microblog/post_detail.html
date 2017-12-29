@@ -3,11 +3,13 @@
 {% block javascript %}
 {% endblock %}
 {% block content %}
-{% load thumbnail %}
 {% load taggit_templatetags2_tags %}
 {% get_taglist as tags %}
 	<div class="col-lg-8">
 		<a href="javascript:void(0);" id="scroll" title="Scroll to Top" style="display: none;">Top<span></span></a>
+		<script>
+			var logoHeight=$("#imgfit img").height();if(logoHeight<350){var margintop=(350-logoHeight)/2;$("#imgfit img").css("margin-top",margintop);}
+		</script>
 		<br />
 		{% if user.is_authenticated %}
 			<!-- Modal -->
@@ -22,7 +24,7 @@
 				  </div>
 				  <div class="modal-body text-center">
 					<a class="btn btn-lg btn-warning" href="{% url 'post_edit' post.id %}">
-						<i class="fa fa-pencil fa-2x pull-left"></i> Delete Post
+						<i class="fa fa-pencil fa-2x pull-left"></i> Edit Post
 					</a>
 					<a class="btn btn-lg btn-danger" href="{% url 'post_delete' post.id %}">
 						<i class="fa fa-trash-o fa-2x pull-left"></i> Delete Post
@@ -34,42 +36,53 @@
 		{% endif %}
 		
 		<div class="post-wrapper wow fadeIn" data-wow-delay="0.4">
-		<div class="card mb-4">
-			<div class="card-body">
-				{% if user.is_authenticated %}
-				<div class="d-flex justify-content-between">
-					<div class="p-2"><h2 href="card-title">{{ post.title|capfirst }}</h2></div>
-					<div class="p-2">
-						<a data-toggle="modal" data-target="#ModalAdmin">
-							<i class="fa fa-pencil fa-lg" aria-hidden="true"></i>
-						</a>
-					</div>
+			<div class="card mw-100">
+				{% if post.image %}
+				<div class="view overlay hm-white-slight">
+					<div id="imgfit">
+							<img class="card-img-top img-fluid img-responsive" src="{{post.image.url}}" alt="{{ post.title }}">
+						</div>
+					<a href="#">
+						<div class="mask"></div>
+					</a>
 				</div>
 				{% else %}
-				<h2 href="card-title">{{ post.title|capfirst }}</h2>
+					<div class="view overlay hm-white-slight">
+						<img src="http://via.placeholder.com/750x350" class="img-fluid" alt="">
+						<a href="#">
+							<div class="mask"></div>
+						</a>
+					</div>
 				{% endif %}
-				<hr />
-					{% if post.image %}
-					<img class="card-img-top img-fluid img-responsive" src="{% thumbnail post.image 750x350 box=post.cropping crop detail %}" alt="{{ post.title }}">
+				<div class="card-body">
+					{% if user.is_authenticated %}
+					<div class="d-flex justify-content-between">
+						<div class="p-2"><h2 href="card-title">{{ post.title|capfirst }}</h2></div>
+						<div class="p-2">
+							<a data-toggle="modal" data-target="#ModalAdmin">
+								<i class="fa fa-pencil fa-lg" aria-hidden="true"></i>
+							</a>
+						</div>
+					</div>
 					{% else %}
-					<img class="img-fluid rounded mx-auto d-block" src="http://via.placeholder.com/750x350" alt="Default Image">
+					<h2 href="card-title">{{ post.title|capfirst }}</h2>
 					{% endif %}
 					<hr/>
 					<!--Full post content goes here-->
 					<p class="lead">{{post.body|safe}}</p>
-			</div>
-			<div class="card-footer text-muted">
-				<div class="row">
-					<div class="col-8 col-sm-6">
-						{% for tag in post.tags.all %}
-							<a href="{% url 'tagged' tag.slug %}" class="badge badge-default">
-								{{tag}}
-							</a>
-						{% endfor %}
+				</div>
+				<div class="card-footer text-muted">
+					<div class="row">
+						<div class="col-8 col-sm-6">
+							{% for tag in post.tags.all %}
+								<a href="{% url 'tagged' tag.slug %}" class="badge badge-default">
+									{{tag}}
+								</a>
+							{% endfor %}
+						</div>
 					</div>
 				</div>
 			</div>
-		</div>
 		</div>
 		
 		<aside id="sticky-social">
